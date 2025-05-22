@@ -5,16 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz Fake News</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Vídeo de fundo -->
-  <video autoplay muted loop id="video-fundo">
-    <source src="videos/fundo.mp4" type="video/mp4">
-  </video>
+  <!-- Vídeo de fundo com cross-fade -->
+  <div id="video-container">
+    <video autoplay muted id="video-fundo-1" class="video-fundo ativo">
+      <source src="videos/fundo3.mp4" type="video/mp4">
+    </video>
+    <video autoplay muted id="video-fundo-2" class="video-fundo">
+      <source src="videos/fundo3.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <!-- Botão de som ambiente -->
-  <button id="toggle-audio" title="Ativar som ambiente">🔊</button>
+  <button id="toggle-audio" title="Ativar som ambiente">🔈</button>
   
   <!-- Áudio ambiente -->
   <audio id="ambiente-audio" loop>
@@ -23,15 +29,16 @@
   </audio>
   <img id="logo-evento" src="imagens/logo/logo.png" alt="Logo do evento ESTG Connect" />
 
-
   <div id="quiz-wrapper">
     <div id="quiz-container">
       <h1 id="titulo">Bem-vindo ao Quiz de Fake News!</h1>
       <p class="subtitulo">Consegue distinguir uma notícia verdadeira de uma falsa?</p>
-      <button id="start-btn">Começar</button>
+      <div class="botoes-inicio">
+        <button id="start-btn">Começar</button>
+        <button id="ver-classificacoes-btn" class="btn-leaderboard-inicio">Classificações</button>
+      </div>
     </div>
-
-
+  </div>
 
   <script src="script.js"></script>
 </body>

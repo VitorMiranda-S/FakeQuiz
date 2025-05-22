@@ -15,68 +15,108 @@
     "imagem": "noticia3.jpg"
   },
   {
-    "texto": "O ser humano tem 206 ossos no corpo.",
+    "texto": "Um restaurante na Suíça oferece pratos feitos com leite materno humano, incluindo queijos e molhos especiais.",
+    "verdadeiro": false,
+    "imagem": "imagens/restaurante-suica.jpg"
+  },
+  {
+    "texto": "Na Islândia existe um aplicativo que permite verificar se você está relacionado com alguém antes de namorar, para evitar incesto em uma população pequena e geneticamente próxima.",
     "verdadeiro": true,
-    "imagem": "noticia4.jpg"
+    "imagem": "imagens/islandia-app.jpg"
   },
   {
-    "texto": "O Google foi fundado em 1998.",
+    "texto": "O Japão criou uma legislação que exige que empresas limitem o horário de trabalho de seus funcionários para não mais que 40 horas por semana, com penalidades severas para violações.",
+    "verdadeiro": false,
+    "imagem": "imagens/japao-trabalho.jpg"
+  },
+  {
+    "texto": "Na Suécia, estudantes universitários recebem um subsídio mensal de 1.000 euros para frequentar a universidade, mesmo se forem estrangeiros.",
+    "verdadeiro": false,
+    "imagem": "imagens/subsidio-suecia.jpg"
+  },
+  {
+    "texto": "No Butão, é ilegal matar qualquer animal, inclusive para consumo, e a população inteira é vegetariana por lei, com importação limitada de carne.",
+    "verdadeiro": false,
+    "imagem": "imagens/butao-vegetariano.jpg"
+  },
+  {
+    "texto": "O McDonalds no Japão serve hambúrgueres feitos com carne bovina envelhecida por 100 dias, custando aproximadamente 85 euros.",
+    "verdadeiro": false,
+    "imagem": "imagens/mcdonalds-japao.jpg"
+  },
+  {
+    "texto": "Na Dinamarca, estudantes universitários são pagos pelo governo para frequentar a universidade, recebendo cerca de 900 euros por mês como bolsa de estudos.",
     "verdadeiro": true,
-    "imagem": "noticia5.jpg"
+    "imagem": "imagens/estudantes-dinamarca.jpg"
   },
   {
-    "texto": "Donald Trump venceu o Prémio Nobel da Paz em 2017.",
-    "verdadeiro": false,
-    "imagem": "noticia6.jpg"
+    "texto": "Em Singapura, é ilegal mascar chiclete desde 1992, com exceção de chiclete medicinal que só pode ser vendido por farmacêuticos e médicos.",
+    "verdadeiro": true,
+    "imagem": "imagens/singapura-chiclete.jpg"
   },
   {
-    "texto": "André Ventura investigado pela PJ por alegado favorecimento político.",
-    "verdadeiro": false,
-    "imagem": "imagens/ventura-pj.jpg"
+    "texto": "Na Noruega, todos os contribuintes têm seus registros fiscais publicados online, permitindo que qualquer pessoa verifique quanto seus vizinhos, colegas ou celebridades ganham e pagam de impostos.",
+    "verdadeiro": true,
+    "imagem": "imagens/noruega-impostos.jpg"
   },
   {
-    "texto": "Telegram do hacker conhecido como 'Lince Digital' partilhou ficheiros com e-mails de ministros.",
-    "verdadeiro": false,
-    "imagem": "noticia8.jpg"
+    "texto": "O governo da Finlândia oferece um 'kit bebê' gratuito para todas as mães grávidas, contendo 63 itens essenciais, incluindo roupas, produtos de higiene e até um pequeno colchão na caixa, que pode ser usada como primeiro berço.",
+    "verdadeiro": true,
+    "imagem": "imagens/finlandia-bebe.jpg"
   },
   {
-    "texto": "Aplicação de rastreio Covid desenvolvida em Portugal recolheu dados sem consentimento, diz investigação alemã.",
+    "texto": "A cidade de Veneza na Itália implementou um sistema de reconhecimento facial que rastreia turistas e cobra automaticamente uma taxa de turismo de seus cartões de crédito.",
     "verdadeiro": false,
-    "imagem": "noticia9.jpg"
+    "imagem": "imagens/veneza-turistas.jpg"
   },
   {
-    "texto": "Ministério da Educação vai substituir exames nacionais por provas feitas por ChatGPT.",
+    "texto": "O governo da Austrália oferece visto de residência permanente para qualquer pessoa com mais de um milhão de seguidores em redes sociais que se mude para o país.",
     "verdadeiro": false,
-    "imagem": "noticia10.jpg"
+    "imagem": "imagens/visto-australia.jpg"
   },
   {
-    "texto": "Benfica propõe usar inteligência artificial para substituir árbitros nos jogos da próxima época.",
-    "verdadeiro": false,
-    "imagem": "noticia11.jpg"
+    "texto": "Na Nova Zelândia, é proibido por lei dar nomes considerados 'prejudiciais' aos bebês, e o governo mantém uma lista de nomes proibidos, incluindo 'Lúcifer', 'Justiça' e qualquer título como 'Rei' ou 'Princesa'.",
+    "verdadeiro": true,
+    "imagem": "imagens/nomes-nz.jpg"
   },
   {
-    "texto": "Tecnologia 6G: Portugal será o primeiro país da Europa a testar a rede 6G, com velocidades 100 vezes superiores às atuais, em áreas metropolitanas selecionadas.",
-    "verdadeiro": false,
-    "imagem": "noticia12.jpg"
+    "texto": "A Suíça realiza referendos nacionais várias vezes por ano, permitindo que os cidadãos votem diretamente em decisões importantes, incluindo um em 2016 que rejeitou um salário básico universal de 2.500 francos suíços por mês para todos os adultos.",
+    "verdadeiro": true,
+    "imagem": "imagens/suica-referendo.jpg"
   },
   {
-    "texto": "Novo Banco de Alimentos: O Governo lançou um programa para recolher alimentos diretamente dos supermercados no final do dia e distribuí-los a famílias carenciadas.",
+    "texto": "Na Coreia do Sul, um estudante universitário desenvolveu um dispositivo que transforma água do mar em água potável usando energia solar em apenas 4 minutos, ganhando reconhecimento da ONU.",
     "verdadeiro": false,
-    "imagem": "noticia13.jpg"
+    "imagem": "imagens/coreia-agua.jpg"
   },
   {
-    "texto": "Hospital de São João emitiu alerta interno sobre uso recorrente de ChatGPT por médicos estagiários para redigir relatórios clínicos.",
-    "verdadeiro": false,
-    "imagem": "noticia14.jpg"
+    "texto": "O governo da Alemanha implementou um sistema onde cidadãos com mais de 65 anos podem optar por viver com estudantes universitários que recebem moradia gratuita em troca de ajudar os idosos.",
+    "verdadeiro": true,
+    "imagem": "imagens/alemanha-idosos.jpg"
   },
   {
-    "texto": "Câmara Municipal de Lisboa pondera usar sensores de movimento e IA para multar automaticamente pessoas que atravessem fora da passadeira.",
+    "texto": "Em Dubai, os táxis voadores autônomos já estão em operação desde 2022, transportando passageiros entre o aeroporto e hotéis selecionados.",
     "verdadeiro": false,
-    "imagem": "noticia15.jpg"
+    "imagem": "imagens/dubai-taxis.jpg"
   },
   {
-    "texto": "Lisboa é uma das cidades selecionadas para o projeto “Smart Surveillance Zone” da ONU, com câmaras 24/7 e microfones em postes de luz.",
+    "texto": "No Japão, é costume nas empresas que os funcionários tirem um 'inemuri', ou seja, cochilos durante o trabalho, pois é visto como sinal de dedicação ao trabalho ao ponto de exaustão.",
+    "verdadeiro": true,
+    "imagem": "imagens/japao-cochilos.jpg"
+  },
+  {
+    "texto": "A Estônia tornou-se o primeiro país a oferecer 'cidadania digital', permitindo que qualquer pessoa no mundo torne-se um e-residente e abra empresas no país sem nunca visitá-lo fisicamente.",
+    "verdadeiro": true,
+    "imagem": "imagens/estonia-digital.jpg"
+  },
+  {
+    "texto": "Na Islândia, a maioria da população acredita na existência de elfos, e projetos de construção já foram alterados para não perturbar supostas residências de criaturas míticas.",
+    "verdadeiro": true,
+    "imagem": "imagens/islandia-elfos.jpg"
+  },
+  {
+    "texto": "O Ministério de Educação da Suécia anunciou que o currículo escolar para 2024 incluirá treinamento obrigatório em programação e inteligência artificial a partir dos 6 anos de idade.",
     "verdadeiro": false,
-    "imagem": "noticia16.jpg"
+    "imagem": "imagens/suecia-educacao.jpg"
   }
 ]
