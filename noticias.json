@@ -1,0 +1,82 @@
+[
+  {
+    "texto": "A Terra é plana.",
+    "verdadeiro": false,
+    "imagem": "imagens/ex.png"
+  },
+  {
+    "texto": "Vacinas causam autismo.",
+    "verdadeiro": false,
+    "imagem": "noticia2.jpg"
+  },
+  {
+    "texto": "A água ferve a 100 graus Celsius ao nível do mar.",
+    "verdadeiro": true,
+    "imagem": "noticia3.jpg"
+  },
+  {
+    "texto": "O ser humano tem 206 ossos no corpo.",
+    "verdadeiro": true,
+    "imagem": "noticia4.jpg"
+  },
+  {
+    "texto": "O Google foi fundado em 1998.",
+    "verdadeiro": true,
+    "imagem": "noticia5.jpg"
+  },
+  {
+    "texto": "Donald Trump venceu o Prémio Nobel da Paz em 2017.",
+    "verdadeiro": false,
+    "imagem": "noticia6.jpg"
+  },
+  {
+    "texto": "André Ventura investigado pela PJ por alegado favorecimento político.",
+    "verdadeiro": false,
+    "imagem": "imagens/ventura-pj.jpg"
+  },
+  {
+    "texto": "Telegram do hacker conhecido como 'Lince Digital' partilhou ficheiros com e-mails de ministros.",
+    "verdadeiro": false,
+    "imagem": "noticia8.jpg"
+  },
+  {
+    "texto": "Aplicação de rastreio Covid desenvolvida em Portugal recolheu dados sem consentimento, diz investigação alemã.",
+    "verdadeiro": false,
+    "imagem": "noticia9.jpg"
+  },
+  {
+    "texto": "Ministério da Educação vai substituir exames nacionais por provas feitas por ChatGPT.",
+    "verdadeiro": false,
+    "imagem": "noticia10.jpg"
+  },
+  {
+    "texto": "Benfica propõe usar inteligência artificial para substituir árbitros nos jogos da próxima época.",
+    "verdadeiro": false,
+    "imagem": "noticia11.jpg"
+  },
+  {
+    "texto": "Tecnologia 6G: Portugal será o primeiro país da Europa a testar a rede 6G, com velocidades 100 vezes superiores às atuais, em áreas metropolitanas selecionadas.",
+    "verdadeiro": false,
+    "imagem": "noticia12.jpg"
+  },
+  {
+    "texto": "Novo Banco de Alimentos: O Governo lançou um programa para recolher alimentos diretamente dos supermercados no final do dia e distribuí-los a famílias carenciadas.",
+    "verdadeiro": false,
+    "imagem": "noticia13.jpg"
+  },
+  {
+    "texto": "Hospital de São João emitiu alerta interno sobre uso recorrente de ChatGPT por médicos estagiários para redigir relatórios clínicos.",
+    "verdadeiro": false,
+    "imagem": "noticia14.jpg"
+  },
+  {
+    "texto": "Câmara Municipal de Lisboa pondera usar sensores de movimento e IA para multar automaticamente pessoas que atravessem fora da passadeira.",
+    "verdadeiro": false,
+    "imagem": "noticia15.jpg"
+  },
+  {
+    "texto": "Lisboa é uma das cidades selecionadas para o projeto “Smart Surveillance Zone” da ONU, com câmaras 24/7 e microfones em postes de luz.",
+    "verdadeiro": false,
+    "imagem": "noticia16.jpg"
+  }
+]

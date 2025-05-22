@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Fake News</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Vídeo de fundo -->
+  <video autoplay muted loop id="video-fundo">
+    <source src="videos/fundo.mp4" type="video/mp4">
+  </video>
+
+  <!-- Botão de som ambiente -->
+  <button id="toggle-audio" title="Ativar som ambiente">🔊</button>
+  
+  <!-- Áudio ambiente -->
+  <audio id="ambiente-audio" loop>
+    <source src="audio/matrix.mp3" type="audio/mp3" />
+    O seu navegador não suporta áudio HTML5.
+  </audio>
+  <img id="logo-evento" src="imagens/logo/logo.png" alt="Logo do evento ESTG Connect" />
+
+
+  <div id="quiz-wrapper">
+    <div id="quiz-container">
+      <h1 id="titulo">Bem-vindo ao Quiz de Fake News!</h1>
+      <p class="subtitulo">Consegue distinguir uma notícia verdadeira de uma falsa?</p>
+      <button id="start-btn">Começar</button>
+    </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
