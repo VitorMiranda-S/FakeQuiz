@@ -18,6 +18,10 @@ let indiceAtual = 0;
 let pontuacao = 0;
 let respostasDadas = [];
 let processandoResposta = false;
+let noticiaJaSubmetida = false;
+let timerAtual = null;
+let timerDuracao = 10; // Duração do timer em segundos
+
 
 let estatisticasGlobais = {
   totalPerguntasIA: 0,
@@ -42,8 +46,17 @@ const video2 = document.getElementById('video-fundo-2');
 // 0. TELA DE LOADING
 // ==============================================
 
+
+// ==============================================
+// 0. TELA DE LOADING
+// ==============================================
+
 // Configuração de eventos iniciais
 document.addEventListener('DOMContentLoaded', () => {
+  // Configurar elementos principais
+  configurarVideoFundo();
+  configurarControleAudio();
+
   // Limpar o texto do título imediatamente para evitar exibição antes da animação
   const tituloPrincipal = document.getElementById('titulo');
   if (tituloPrincipal) {
@@ -54,39 +67,46 @@ document.addEventListener('DOMContentLoaded', () => {
     tituloPrincipal.classList.add('escondido');
   }
   
+  const quizWrapper = document.getElementById('quiz-wrapper');
+  const toggleAudio = document.getElementById('toggle-audio');
+  const logoEvento = document.getElementById('logo-evento');
+  const videoContainer = document.getElementById('video-container');
+  
   // Esconder o conteúdo principal até o loading terminar
-  document.getElementById('quiz-wrapper').style.opacity = '0';
-  document.getElementById('quiz-wrapper').style.transition = 'opacity 0.8s ease-in';
-  document.getElementById('toggle-audio').style.opacity = '0';
-  document.getElementById('toggle-audio').style.transition = 'opacity 0.8s ease-in';
-  document.getElementById('logo-evento').style.opacity = '0';
-  document.getElementById('logo-evento').style.transition = 'opacity 0.8s ease-in';
-  document.getElementById('video-container').style.opacity = '0';
-  document.getElementById('video-container').style.transition = 'opacity 1s ease-in';
+  if (quizWrapper) quizWrapper.style.opacity = '0';
+  if (quizWrapper) quizWrapper.style.transition = 'opacity 0.8s ease-in';
+  if (toggleAudio) toggleAudio.style.opacity = '0';
+  if (toggleAudio) toggleAudio.style.transition = 'opacity 0.8s ease-in';
+  if (logoEvento) logoEvento.style.opacity = '0';
+  if (logoEvento) logoEvento.style.transition = 'opacity 0.8s ease-in';
+  if (videoContainer) videoContainer.style.opacity = '0';
+  if (videoContainer) videoContainer.style.transition = 'opacity 1s ease-in';
   
   // Ativar o primeiro vídeo após o loading
-  const video1 = document.getElementById('video-fundo-1');
-  video1.classList.remove('ativo');
+  if (video1) video1.classList.remove('ativo');
+
 
   // Iniciar timer de 3 segundos para a tela de loading
   setTimeout(() => {
     // Fazer fade out da tela de loading
     const loadingScreen = document.getElementById('loading-screen');
-    loadingScreen.style.opacity = '0';
+    if (loadingScreen) loadingScreen.style.opacity = '0';
     
     // Mostrar o conteúdo principal
-    document.getElementById('quiz-wrapper').style.opacity = '1';
-    document.getElementById('toggle-audio').style.opacity = '1';
-    document.getElementById('logo-evento').style.opacity = '1';
-    document.getElementById('video-container').style.opacity = '1';
+    if (quizWrapper) quizWrapper.style.opacity = '1';
+    if (toggleAudio) toggleAudio.style.opacity = '1';
+    if (logoEvento) logoEvento.style.opacity = '1';
+    if (videoContainer) videoContainer.style.opacity = '1';
     
     // Iniciar o vídeo de fundo
-    video1.classList.add('ativo');
-    video1.play();
+    if (video1) {
+      video1.classList.add('ativo');
+      video1.play();
+    }
     
     // Remover a tela de loading após a transição
     setTimeout(() => {
-      loadingScreen.style.display = 'none';
+      if (loadingScreen) loadingScreen.style.display = 'none';
       
       // Preparar o título para a animação sem alterar o layout
       if (tituloPrincipal) {
@@ -101,20 +121,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 800);
   }, 3000);
   
-  // Inicializar as configurações
-  if (botaoIniciar) botaoIniciar.addEventListener('click', iniciarQuiz);
-  if (btnVerClassificacoes) btnVerClassificacoes.addEventListener('click', mostrarLeaderboardInicial);
-  
-  // Adicionar listeners para os novos botões
-  const btnEstatisticas = document.getElementById('btn-estatisticas');
-  if (btnEstatisticas) btnEstatisticas.addEventListener('click', mostrarEstatisticas);
-  
-  const btnCreditos = document.getElementById('btn-creditos');
-  if (btnCreditos) btnCreditos.addEventListener('click', mostrarCreditos);
+  // Inicializar os listeners de eventos para os botões do menu
+  registrarEventosMenuInicial();
   
   // Carregar estatísticas existentes
   carregarEstatisticas();
 });
+
+// Função para registrar eventos dos botões do menu inicial
+function registrarEventosMenuInicial() {
+  // Botão de iniciar quiz
+  const btnIniciar = document.getElementById('start-btn');
+  if (btnIniciar) {
+    // Remover listeners existentes para evitar duplicação
+    const novoBtn = btnIniciar.cloneNode(true);
+    btnIniciar.parentNode.replaceChild(novoBtn, btnIniciar);
+    novoBtn.addEventListener('click', iniciarQuiz);
+  }
+  
+  // Botão de classificações
+  const btnClassificacoes = document.getElementById('ver-classificacoes-btn');
+  if (btnClassificacoes) {
+    const novoBtn = btnClassificacoes.cloneNode(true);
+    btnClassificacoes.parentNode.replaceChild(novoBtn, btnClassificacoes);
+    novoBtn.addEventListener('click', mostrarLeaderboardInicial);
+  }
+  
+  // Botão de estatísticas
+  const btnEstatisticas = document.getElementById('btn-estatisticas');
+  if (btnEstatisticas) {
+    const novoBtn = btnEstatisticas.cloneNode(true);
+    btnEstatisticas.parentNode.replaceChild(novoBtn, btnEstatisticas);
+    novoBtn.addEventListener('click', mostrarEstatisticas);
+  }
+  
+  // Botão de créditos
+  const btnCreditos = document.getElementById('btn-creditos');
+  if (btnCreditos) {
+    const novoBtn = btnCreditos.cloneNode(true);
+    btnCreditos.parentNode.replaceChild(novoBtn, btnCreditos);
+    novoBtn.addEventListener('click', mostrarCreditos);
+  }
+}
+
 
 // ==============================================
 // 2. MANIPULAÇÃO DO VÍDEO E ÁUDIO
@@ -178,37 +227,69 @@ function configurarControleAudio() {
 // ==============================================
 // Início do quiz
 function iniciarQuiz() {
-  fetch('noticias.json')
   // Resetar o estado da submissão ao iniciar um novo jogo
   noticiaJaSubmetida = false;
 
-  // Carregar notícias do servidor
+  // Carregar notícias - primeiro tentar do servidor, se falhar usar o arquivo local
   fetch('http://localhost:3000/api/noticias')
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('Servidor indisponível');
+      return res.json();
+    })
     .then(dados => {
-      todasPerguntas = dados;
-      perguntasSelecionadas = escolherAleatorias(todasPerguntas, 3);
-      indiceAtual = 0;
-      pontuacao = 0;
-      respostasDadas = [];
-      
-      // Limpar qualquer barra de progresso existente
-      const barraAnterior = document.getElementById('barra-progresso');
-      if (barraAnterior) {
-        barraAnterior.remove();
-      }
-      
-      // Resetar o container e mostrar a primeira pergunta
-      container.classList.remove('resultado-container');
-      mostrarPergunta();
-      
-      // Garantir que a barra de progresso está visível
-      const barra = document.getElementById('barra-progresso');
-      if (barra) {
-        barra.style.display = 'block';
-        barra.classList.remove('fade-out-progressbar');
-      }
+      // Sucesso na API - usar dados do servidor
+      processarDadosCarregados(dados);
+    })
+    .catch(erro => {
+      console.log('Usando dados locais:', erro.message);
+      // Falha na API - carregar do arquivo local
+      fetch('noticias.json')
+        .then(res => res.json())
+        .then(dados => {
+          // Adicionar notícias do localStorage (se existirem)
+          const noticiasHumanas = JSON.parse(localStorage.getItem('noticiasHumanas') || '[]');
+          const dadosCombinados = [...dados, ...noticiasHumanas];
+          processarDadosCarregados(dadosCombinados);
+        })
+        .catch(err => {
+          console.error('Erro ao carregar dados locais:', err);
+          alert('Erro ao carregar perguntas. Por favor, tente novamente.');
+          voltarAoInicio();
+        });
     });
+}
+
+// Função auxiliar para processar dados carregados
+function processarDadosCarregados(dados) {
+  todasPerguntas = dados;
+  perguntasSelecionadas = escolherAleatorias(todasPerguntas, 3);
+  indiceAtual = 0;
+  pontuacao = 0;
+  respostasDadas = [];
+  
+  // Limpar qualquer barra de progresso existente
+  const barraAnterior = document.getElementById('barra-progresso');
+  if (barraAnterior) {
+    barraAnterior.remove();
+  }
+  
+  // Limpar qualquer timer existente
+  if (timerAtual) {
+    clearTimeout(timerAtual);
+    timerAtual = null;
+  }
+  
+  // Resetar o container e mostrar a primeira pergunta
+  container.classList.remove('resultado-container');
+  container.classList.remove('formulario-noticia-container');
+  mostrarPergunta();
+  
+  // Garantir que a barra de progresso está visível
+  const barra = document.getElementById('barra-progresso');
+  if (barra) {
+    barra.style.display = 'block';
+    barra.classList.remove('fade-out-progressbar');
+  }
 }
 
 // Escolher perguntas aleatórias
@@ -228,6 +309,13 @@ function responder(resposta) {
   if (processandoResposta) return;
   processandoResposta = true;
   
+
+  // Limpar o timer atual
+  if (timerAtual) {
+    clearTimeout(timerAtual);
+    timerAtual = null;
+  }
+ 
   // Desativar os botões imediatamente para feedback visual
   const botoes = document.querySelectorAll('.resposta');
   botoes.forEach(btn => {
@@ -295,7 +383,6 @@ function responder(resposta) {
       processandoResposta = false;
     }, 300);
   }
-  
 }
 
 // Função para mostrar a página de estatísticas
@@ -454,32 +541,34 @@ function mostrarCreditos() {
   
   creditosContainer.innerHTML = `
     <div class="credito-secao">
-      <h3 class="estatistica-titulo">Desenvolvimento</h3>
-      <ul class="credito-lista">
-        <li><strong>Design e Programação:</strong> Equipa FakeQuiz</li>
-        <li><strong>Conceito e Ideia:</strong> Projeto de Literacia Mediática</li>
-        <li><strong>Ano de Desenvolvimento:</strong> 2025</li>
-      </ul>
-    </div>
-    
-    <div class="credito-secao">
-      <h3 class="estatistica-titulo">Recursos</h3>
-      <ul class="credito-lista">
-        <li><strong>Ambiente Visual:</strong> Inspirado no filme Matrix</li>
-        <li><strong>Efeitos Sonoros:</strong> Clubbed to Death - Rob Dougan</li>
-        <li><strong>Vídeo de Fundo:</strong> https://www.vecteezy.com/members/biggapixmotion</li>
-      </ul>
-    </div>
-    
-    <div class="credito-secao">
-      <h3 class="estatistica-titulo">Agradecimentos Especiais</h3>
-      <p>O nosso agradecimento a todos os utilizadores que contribuíram com notícias e ajudaram a melhorar esta plataforma educativa.</p>
-      
-      <div class="estatistica-titulo" style="margin-top: 30px;">
-        <p>Desenvolvido com ❤️ pela equipa FakeQuiz</p>
-        <p style="font-size: 14px;">Vamos combater a desinformação juntos!</p>
-      </div>
-    </div>
+  <h3 class="estatistica-titulo">Desenvolvimento</h3>
+  <ul class="credito-lista">
+    <li><span class="credito-label">Design e Programação:</span> Equipa FakeQuiz</li>
+    <li><span class="credito-label">Conceito e Ideia:</span> Projeto de Literacia Mediática</li>
+    <li><span class="credito-label">Ano de Desenvolvimento:</span> 2025</li>
+  </ul>
+</div>
+
+<div class="credito-secao">
+  <h3 class="estatistica-titulo">Recursos</h3>
+  <ul class="credito-lista">
+    <li><span class="credito-label">Ambiente Visual:</span> Inspirado no filme Matrix</li>
+    <li><span class="credito-label">Efeitos Sonoros:</span> Clubbed to Death - Rob Dougan</li>
+    <li><span class="credito-label">Vídeo de Fundo:</span> 
+      <a href="https://www.vecteezy.com/members/biggapixmotion" target="_blank">Vecteezy (biggapixmotion)</a>
+    </li>
+  </ul>
+</div>
+
+<div class="credito-secao">
+  <h3 class="estatistica-titulo">Agradecimentos Especiais</h3>
+  <p>O nosso agradecimento a todos os utilizadores que contribuíram com notícias e ajudaram a melhorar esta plataforma educativa.</p>
+
+  <div class="estatistica-titulo" style="margin-top: 30px;">
+    <p>Desenvolvido com <span class="heart-pulse">❤️</span> pela equipa FakeQuiz</p>
+    <p style="font-size: 14px;">Vamos combater a desinformação juntos!</p>
+  </div>
+</div>
   `;
   
   container.appendChild(creditosContainer);
@@ -514,13 +603,24 @@ function mostrarPergunta() {
   setTimeout(() => {
     container.innerHTML = '';
 
-   const btnVoltar = criarBotaoVoltar();
+    const btnVoltar = criarBotaoVoltar();
+
     container.appendChild(btnVoltar);
 
     const h2 = document.createElement('h2');
     h2.classList.add('typing');
     container.appendChild(h2);
     
+
+    // Adicionar componente de timer
+    const timerContainer = document.createElement('div');
+    timerContainer.className = 'timer-container';
+    timerContainer.innerHTML = `
+      <div class="timer-barra" id="timer-barra"></div>
+      <div class="timer-texto" id="timer-texto">${timerDuracao}s</div>
+    `;
+    container.appendChild(timerContainer);
+
     // Criar div para os botões com ordem invertida
     const botoesDiv = document.createElement('div');
     botoesDiv.className = 'botoes-resposta';
@@ -565,6 +665,11 @@ function mostrarPergunta() {
       // Adicionar classe visual para indicar que os botões estão ativos
       btnVerdadeiro.classList.add('ativo');
       btnFalso.classList.add('ativo');
+
+      
+      // Iniciar o timer após o texto ser exibido
+      iniciarTimer();
+
     });
 
     container.classList.remove('fade-out');
@@ -738,7 +843,6 @@ function atualizarProgresso() {
   document.getElementById('progresso-texto').innerText = `${perguntasRespondidas} / ${totalPerguntas}`;
 }
 
-let noticiaJaSubmetida = false;
 // Mostrar resultado final
 function mostrarResultado() {
   const barra = document.getElementById('barra-progresso');
@@ -967,19 +1071,37 @@ function criarTabelaRespostas() {
   tabela.innerHTML = `
     <tr>
       <th>Notícia</th>
-      <th>Resposta</th>
+
+      <th>Tua Resposta</th>
       <th>Resultado</th>
+      <th>Origem</th>
+
     </tr>
   `;
 
   respostasDadas.forEach(item => {
     const linha = document.createElement('tr');
-    linha.className = item.respostaDada === item.respostaCorreta ? 'correto' : 'errado';
-    linha.innerHTML = `
-      <td style="text-align: center;">${item.texto}</td>
-      <td>${item.respostaDada ? 'Verdadeiro' : 'Falso'}</td>
-      <td>${item.respostaDada === item.respostaCorreta ? '✅ Correto' : '❌ Errado'}</td>
-    `;
+    
+    // Verificar se foi timeout
+    if (item.respostaDada === "timeout") {
+      linha.className = 'timeout';
+      linha.innerHTML = `
+        <td style="text-align: center;">${item.texto}</td>
+        <td>Tempo esgotado</td>
+        <td>❌ A notícia era ${item.respostaCorreta ? 'Verdadeira' : 'Falsa'}</td>
+        <td>${item.isHuman ? 'Humano' : 'IA'}</td>
+      `;
+    } else {
+      linha.className = item.respostaDada === item.respostaCorreta ? 'correto' : 'errado';
+      linha.innerHTML = `
+        <td style="text-align: center;">${item.texto}</td>
+        <td>${item.respostaDada ? 'Verdadeiro' : 'Falso'}</td>
+        <td>${item.respostaDada === item.respostaCorreta ? '✅' : '❌'} A notícia era ${item.respostaCorreta ? 'Verdadeira' : 'Falsa'}</td>
+        <td>${item.isHuman ? 'Humano' : 'IA'}</td>
+      `;
+    }
+    
+
     tabela.appendChild(linha);
   });
 
@@ -1027,6 +1149,8 @@ function voltarAoInicio() {
   }
   container.innerHTML = '';
   container.classList.remove('resultado-container');
+  container.classList.remove('formulario-noticia-container');
+
 
   const titulo = document.createElement('h1');
   titulo.id = 'titulo';

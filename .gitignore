@@ -1,0 +1,59 @@
+# Dependências
+node_modules/
+package-lock.json
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de cache
+.npm/
+.eslintcache
+.cache/
+
+# Arquivos de build
+/dist
+/build
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Arquivos temporários
+*.swp
+*.swo
+*~
+
+# Dados locais
+/data
+
+# Arquivos específicos do editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de teste
+coverage/
+.nyc_output/
+
+# Arquivos locais de configuração
+config.local.js
+
+# Arquivos de debug
+debug.log
+
+# Arquivos de backup
+*.bak
