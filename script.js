@@ -180,8 +180,11 @@ function configurarControleAudio() {
 function iniciarQuiz() {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   fetch('noticias.json')
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   // Resetar o estado da submissão ao iniciar um novo jogo
@@ -707,6 +710,9 @@ function salvarEstatisticas() {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -1037,7 +1043,10 @@ function criarFormularioPontuacao() {
 function voltarAoInicio() {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   // Limpar qualquer timer existente
