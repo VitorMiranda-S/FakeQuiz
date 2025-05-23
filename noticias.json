@@ -16,7 +16,6 @@
   },
   {
     "texto": "Um restaurante na Suíça oferece pratos feitos com leite materno humano, incluindo queijos e molhos especiais.",
-<<<<<<< Updated upstream
     "verdadeiro": false,
     "imagem": "imagens/restaurante-suica.jpg"
   },
@@ -119,9 +118,6 @@
     "texto": "O Ministério de Educação da Suécia anunciou que o currículo escolar para 2024 incluirá treinamento obrigatório em programação e inteligência artificial a partir dos 6 anos de idade.",
     "verdadeiro": false,
     "imagem": "imagens/suecia-educacao.jpg"
-=======
-    "verdadeiro": false,
-    "imagem": "imagens/restaurante-suica.jpg"
   },
   {
     "texto": "Na Islândia existe um aplicativo que permite verificar se você está relacionado com alguém antes de namorar, para evitar incesto em uma população pequena e geneticamente próxima.",
@@ -587,15 +583,6 @@
     "imagem": "",
     "isHuman": true,
     "dataSubmissao": "2025-05-23T14:52:41.470Z"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
   }
 ]
