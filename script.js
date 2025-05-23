@@ -95,10 +95,14 @@ function configurarControleAudio() {
 // ==============================================
 // Início do quiz
 function iniciarQuiz() {
-  fetch('noticias.json')
+  // Carregar notícias do servidor
+  fetch('http://localhost:3000/api/noticias')
     .then(res => res.json())
     .then(dados => {
+      // Guardar todas as notícias
       todasPerguntas = dados;
+      
+      // Escolher aleatoriamente 3 perguntas
       perguntasSelecionadas = escolherAleatorias(todasPerguntas, 3);
       indiceAtual = 0;
       pontuacao = 0;
@@ -120,6 +124,35 @@ function iniciarQuiz() {
         barra.style.display = 'block';
         barra.classList.remove('fade-out-progressbar');
       }
+    })
+    .catch(error => {
+      console.error('Erro ao carregar notícias:', error);
+      
+      // Fallback para o ficheiro JSON estático em caso de falha
+      fetch('noticias.json')
+        .then(res => res.json())
+        .then(dados => {
+          const noticiasHumanas = JSON.parse(localStorage.getItem('noticiasHumanas') || '[]');
+          todasPerguntas = [...dados, ...noticiasHumanas];
+          
+          // Continuar com o processo normal
+          perguntasSelecionadas = escolherAleatorias(todasPerguntas, 3);
+          indiceAtual = 0;
+          pontuacao = 0;
+          respostasDadas = [];
+          
+          const barraAnterior = document.getElementById('barra-progresso');
+          if (barraAnterior) barraAnterior.remove();
+          
+          container.classList.remove('resultado-container');
+          mostrarPergunta();
+          
+          const barra = document.getElementById('barra-progresso');
+          if (barra) {
+            barra.style.display = 'block';
+            barra.classList.remove('fade-out-progressbar');
+          }
+        });
     });
 }
 
@@ -139,6 +172,12 @@ function responder(resposta) {
   // Se já estiver processando uma resposta, ignorar cliques adicionais
   if (processandoResposta) return;
   processandoResposta = true;
+  
+  // Limpar o timer quando o jogador responde
+  if (timerAtual) {
+    clearTimeout(timerAtual);
+    timerAtual = null;
+  }
   
   // Desativar os botões imediatamente para feedback visual
   const botoes = document.querySelectorAll('.resposta');
@@ -197,12 +236,22 @@ function responder(resposta) {
 // ==============================================
 // 4. FUNÇÕES DE UI E VISUALIZAÇÃO
 // ==============================================
-// Mostrar uma pergunta com efeito de geração de texto
+// Adicionar variáveis globais para o timer
+let timerAtual = null;
+let timerDuracao = 10; // duração em segundos
+
+// Modificar a função mostrarPergunta para incluir o timer e efeito de geração
 function mostrarPergunta() {
   const pergunta = perguntasSelecionadas[indiceAtual];
   atualizarProgresso();
 
   container.classList.add('fade-out');
+
+  // Limpar qualquer timer existente
+  if (timerAtual) {
+    clearTimeout(timerAtual);
+    timerAtual = null;
+  }
 
   setTimeout(() => {
     container.innerHTML = '';
@@ -240,6 +289,23 @@ function mostrarPergunta() {
     botoesDiv.appendChild(btnVerdadeiro);
     container.appendChild(botoesDiv);
 
+    // Criar e adicionar o timer visual
+    const timerContainer = document.createElement('div');
+    timerContainer.className = 'timer-container';
+    
+    const timerBarra = document.createElement('div');
+    timerBarra.className = 'timer-barra';
+    timerBarra.id = 'timer-barra';
+    
+    const timerTexto = document.createElement('div');
+    timerTexto.className = 'timer-texto';
+    timerTexto.id = 'timer-texto';
+    timerTexto.innerText = `${timerDuracao}s`;
+    
+    timerContainer.appendChild(timerBarra);
+    timerContainer.appendChild(timerTexto);
+    container.appendChild(timerContainer);
+
     // Mostrar imagem apenas se existir
     if (pergunta.imagem && pergunta.imagem.trim() !== '') {
       const img = document.createElement('img');
@@ -262,6 +328,9 @@ function mostrarPergunta() {
       // Adicionar classe visual para indicar que os botões estão ativos
       btnVerdadeiro.classList.add('ativo');
       btnFalso.classList.add('ativo');
+      
+      // Iniciar o timer após ativar os botões
+      iniciarTimer();
     });
 
     container.classList.remove('fade-out');
@@ -269,6 +338,107 @@ function mostrarPergunta() {
     setTimeout(() => container.classList.remove('fade-in'), 400);
   }, 400);
 }
+
+// Função para iniciar e gerenciar o timer
+function iniciarTimer() {
+  let tempoRestante = timerDuracao;
+  const timerBarra = document.getElementById('timer-barra');
+  const timerTexto = document.getElementById('timer-texto');
+  
+  // Inicializar a barra visualmente
+  timerBarra.style.width = '100%';
+  timerBarra.className = 'timer-barra timer-ativo';
+  
+  // Atualizar o timer a cada segundo
+  const atualizarTimer = () => {
+    tempoRestante--;
+    
+    if (tempoRestante >= 0) {
+      // Atualizar texto e largura da barra
+      timerTexto.innerText = `${tempoRestante}s`;
+      const porcentagem = (tempoRestante / timerDuracao) * 100;
+      timerBarra.style.width = `${porcentagem}%`;
+      
+      // Adicionar classe de aviso nos últimos 3 segundos
+      if (tempoRestante <= 3) {
+        timerBarra.className = 'timer-barra timer-alerta';
+        timerTexto.className = 'timer-texto timer-texto-alerta';
+      }
+      
+      // Chamar próxima atualização
+      timerAtual = setTimeout(atualizarTimer, 1000);
+    } else {
+      // Tempo esgotado, considerar como resposta errada
+      timerBarra.className = 'timer-barra timer-expirado';
+      timerTexto.className = 'timer-texto timer-texto-expirado';
+      timerTexto.innerText = 'Tempo!';
+      
+      // Após breve pausa para mostrar que o tempo acabou, processar como resposta errada
+      setTimeout(() => {
+        tempoEsgotado();
+      }, 800);
+    }
+  };
+  
+  // Iniciar a contagem regressiva
+  timerAtual = setTimeout(atualizarTimer, 1000);
+}
+
+// Função que lida com o tempo esgotado
+function tempoEsgotado() {
+  // Se já estiver processando uma resposta, ignorar
+  if (processandoResposta) return;
+  processandoResposta = true;
+  
+  // Desativar os botões
+  const botoes = document.querySelectorAll('.resposta');
+  botoes.forEach(btn => {
+    btn.disabled = true;
+    btn.style.cursor = 'not-allowed';
+  });
+  
+  const pergunta = perguntasSelecionadas[indiceAtual];
+  const correta = pergunta.verdadeiro;
+
+  // Registrar como tempo esgotado
+  respostasDadas.push({
+    texto: pergunta.texto,
+    respostaDada: "timeout", // Valor especial para indicar tempo esgotado
+    respostaCorreta: correta,
+    isHuman: pergunta.isHuman || false
+  });
+
+  indiceAtual++;
+  
+  // A mesma lógica da função responder() para verificar se é a última pergunta
+  if (indiceAtual >= perguntasSelecionadas.length) {
+    const barraPreenchida = document.getElementById('progresso-preenchido');
+    const textoProgresso = document.getElementById('progresso-texto');
+    
+    if (barraPreenchida && textoProgresso) {
+      barraPreenchida.style.width = '100%';
+      textoProgresso.innerText = `${perguntasSelecionadas.length} / ${perguntasSelecionadas.length}`;
+      
+      setTimeout(() => {
+        const barra = document.getElementById('barra-progresso');
+        if (barra) {
+          barra.classList.add('fade-out-progressbar');
+          
+          setTimeout(() => {
+            mostrarResultado();
+            processandoResposta = false;
+          }, 800);
+        }
+      }, 600);
+    }
+  } else {
+    setTimeout(() => {
+      mostrarPergunta();
+      processandoResposta = false;
+    }, 800);
+  }
+}
+
 
 // Atualizar barra de progresso
 function atualizarProgresso() {
@@ -311,6 +481,8 @@ function atualizarProgresso() {
 }
 
 // Mostrar resultado final
+// Botão de submissão de pontuação
+// Botão botão de submissão de notícias
 function mostrarResultado() {
   const barra = document.getElementById('barra-progresso');
   if (barra) barra.style.display = 'none';
@@ -355,26 +527,212 @@ function mostrarResultado() {
 
   criarTabelaRespostas();
   criarFormularioPontuacao();
+  
+  // Adicionar botão para submeter notícia - visível para todos, mas ativo apenas para quem tem >= 50%
+  const btnSubmeterNoticia = document.createElement('button');
+  btnSubmeterNoticia.className = 'btn-submeter-noticia';
+  btnSubmeterNoticia.innerText = 'Submeter Nova Notícia';
+  
+  // Verificar se o utilizador tem pontuação suficiente (>= 50%)
+  if (percentagem >= 50) {
+    btnSubmeterNoticia.addEventListener('click', mostrarFormularioNovaNoticia);
+  } else {
+    btnSubmeterNoticia.disabled = true;
+    btnSubmeterNoticia.title = 'Precisas de acertar pelo menos 50% das perguntas para desbloquear esta funcionalidade';
+    btnSubmeterNoticia.classList.add('btn-bloqueado');
+  }
+  
+  container.appendChild(btnSubmeterNoticia);
 }
 
+// Função para mostrar o formulário de submissão de novas notícias
+function mostrarFormularioNovaNoticia() {
+  container.innerHTML = '';
+  container.classList.remove('resultado-container');
+  container.classList.add('formulario-noticia-container');
+
+  const btnVoltar = document.createElement('button');
+  btnVoltar.id = 'btn-voltar-inicio';
+  btnVoltar.innerText = '⎋';
+  btnVoltar.title = 'Voltar ao início';
+  btnVoltar.addEventListener('click', voltarAoResultado);
+  container.appendChild(btnVoltar);
+
+  const titulo = document.createElement('h2');
+  titulo.classList.add('typing');
+  container.appendChild(titulo);
+  escreverTextoComEfeitoGeracao(titulo, 'Submeter Nova Notícia');
+
+  const instrucoes = document.createElement('p');
+  instrucoes.innerHTML = `
+    Cria uma notícia verdadeira ou falsa para desafiar outros jogadores.<br>
+    As melhores notícias são aquelas que parecem plausíveis mas contêm elementos incorretos.<br>
+    Sê criativo, mas mantém a notícia dentro de temas atuais e relevantes.
+  `;
+  container.appendChild(instrucoes);
+
+  // Criar formulário para submissão de notícia
+  const form = document.createElement('form');
+  form.id = 'form-noticia';
+  form.className = 'form-noticia';
+  form.innerHTML = `
+    <div class="campo-formulario">
+      <label for="texto-noticia">Texto da Notícia:</label>
+      <textarea id="texto-noticia" rows="5" placeholder="Escreve aqui a tua notícia..." required></textarea>
+    </div>
+
+    <div class="campo-formulario">
+      <label>Esta notícia é:</label>
+      <div class="radio-opcoes">
+        <label class="radio-label">
+          <input type="radio" name="verdadeiro" value="true" required> Verdadeira
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="verdadeiro" value="false"> Falsa
+        </label>
+      </div>
+    </div>
+    
+    <div class="campo-formulario">
+      <label for="url-imagem">URL da imagem (opcional):</label>
+      <input type="url" id="url-imagem" placeholder="https://exemplo.com/imagem.jpg">
+      <small>Deixa em branco se não tiveres uma imagem para a notícia</small>
+    </div>
+    
+    <div class="botoes-formulario">
+      <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+      <button type="submit" id="btn-submeter" class="btn-submeter">Submeter Notícia</button>
+    </div>
+    
+    <div id="mensagem-submissao" class="mensagem-submissao"></div>
+  `;
+  container.appendChild(form);
+
+  // Adicionar event listeners para o formulário
+  document.getElementById('btn-cancelar').addEventListener('click', voltarAoResultado);
+  document.getElementById('form-noticia').addEventListener('submit', submeterNovaNoticia);
+}
+
+// Função para voltar à página de resultados
+function voltarAoResultado() {
+  mostrarResultado();
+}
+
+// Função para processar a submissão de uma nova notícia
+function submeterNovaNoticia(event) {
+  event.preventDefault();
+  
+  // Obter valores do formulário
+  const textoNoticia = document.getElementById('texto-noticia').value.trim();
+  const verdadeiro = document.querySelector('input[name="verdadeiro"]:checked').value === 'true';
+  const urlImagem = document.getElementById('url-imagem').value.trim();
+  const mensagemElement = document.getElementById('mensagem-submissao');
+  
+  // Validações básicas
+  if (!textoNoticia) {
+    mensagemElement.className = 'mensagem-submissao erro';
+    mensagemElement.textContent = 'Por favor, insere o texto da notícia';
+    return;
+  }
+  
+  if (textoNoticia.length < 20) {
+    mensagemElement.className = 'mensagem-submissao erro';
+    mensagemElement.textContent = 'O texto da notícia deve ter pelo menos 20 caracteres';
+    return;
+  }
+  
+  // Desativar o botão de submissão para evitar múltiplos cliques
+  const btnSubmeter = document.getElementById('btn-submeter');
+  btnSubmeter.disabled = true;
+  btnSubmeter.textContent = 'A submeter...';
+  mensagemElement.textContent = '';
+  
+  // Criar objeto de notícia
+  const novaNoticia = {
+    texto: textoNoticia,
+    verdadeiro: verdadeiro,
+    imagem: urlImagem || "", 
+    isHuman: true,
+    dataSubmissao: new Date().toISOString()
+  };
+  
+  // Enviar para o servidor usando fetch
+  fetch('http://localhost:3000/api/noticias', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(novaNoticia)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro ao submeter notícia');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Também guardar em localStorage para uso imediato
+    let noticiasHumanas = JSON.parse(localStorage.getItem('noticiasHumanas') || '[]');
+    noticiasHumanas.push(novaNoticia);
+    localStorage.setItem('noticiasHumanas', JSON.stringify(noticiasHumanas));
+    
+    // Mostrar mensagem de sucesso
+    mensagemElement.className = 'mensagem-submissao sucesso';
+    mensagemElement.textContent = 'Notícia submetida com sucesso! Obrigado pela tua contribuição.';
+    
+    // Limpar o formulário
+    document.getElementById('form-noticia').reset();
+    
+    // Voltar ao menu de resultados após alguns segundos
+    setTimeout(() => voltarAoResultado(), 3000);
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    mensagemElement.className = 'mensagem-submissao erro';
+    mensagemElement.textContent = 'Ocorreu um erro ao submeter a notícia. Tenta novamente mais tarde.';
+  })
+  .finally(() => {
+    // Restaurar o botão de submissão
+    btnSubmeter.disabled = false;
+    btnSubmeter.textContent = 'Submeter Notícia';
+  });
+}
+
+
+// Modificar a função criarTabelaRespostas para mostrar explicitamente se a notícia era verdadeira ou falsa e origem da notícia
 function criarTabelaRespostas() {
   const tabela = document.createElement('table');
   tabela.innerHTML = `
     <tr>
       <th>Notícia</th>
-      <th>Resposta</th>
+      <th>Tua Resposta</th>
       <th>Resultado</th>
+      <th>Origem</th>
     </tr>
   `;
 
   respostasDadas.forEach(item => {
     const linha = document.createElement('tr');
-    linha.className = item.respostaDada === item.respostaCorreta ? 'correto' : 'errado';
-    linha.innerHTML = `
-      <td style="text-align: center;">${item.texto}</td>
-      <td>${item.respostaDada ? 'Verdadeiro' : 'Falso'}</td>
-      <td>${item.respostaDada === item.respostaCorreta ? '✅ Correto' : '❌ Errado'}</td>
-    `;
+    
+    // Verificar se foi timeout
+    if (item.respostaDada === "timeout") {
+      linha.className = 'timeout';
+      linha.innerHTML = `
+        <td style="text-align: center;">${item.texto}</td>
+        <td>Tempo esgotado</td>
+        <td>❌ Notícia ${item.respostaCorreta ? 'Verdadeira' : 'Falsa'}</td>
+        <td>${item.isHuman ? 'Humano' : 'IA'}</td>
+      `;
+    } else {
+      linha.className = item.respostaDada === item.respostaCorreta ? 'correto' : 'errado';
+      linha.innerHTML = `
+        <td style="text-align: center;">${item.texto}</td>
+        <td>${item.respostaDada ? 'Verdadeiro' : 'Falso'}</td>
+        <td>${item.respostaDada === item.respostaCorreta ? '✅' : '❌'} Notícia ${item.respostaCorreta ? 'Verdadeira' : 'Falsa'}</td>
+        <td>${item.isHuman ? 'Humano' : 'IA'}</td>
+      `;
+    }
+    
     tabela.appendChild(linha);
   });
 
@@ -415,6 +773,13 @@ function criarFormularioPontuacao() {
 
 // Voltar ao início
 function voltarAoInicio() {
+
+  // Limpar qualquer timer existente
+  if (timerAtual) {
+    clearTimeout(timerAtual);
+    timerAtual = null;
+  }
+
   container.innerHTML = '';
   container.classList.remove('resultado-container');
 
