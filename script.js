@@ -179,7 +179,9 @@ function configurarControleAudio() {
 // Início do quiz
 function iniciarQuiz() {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   fetch('noticias.json')
+=======
 =======
   // Resetar o estado da submissão ao iniciar um novo jogo
   noticiaJaSubmetida = false;
@@ -703,6 +705,9 @@ function salvarEstatisticas() {
   localStorage.setItem('fakeQuizEstatisticas', JSON.stringify(estatisticasGlobais));
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 // Atualizar barra de progresso
 function atualizarProgresso() {
@@ -1030,7 +1035,10 @@ function criarFormularioPontuacao() {
 // Voltar ao início
 function voltarAoInicio() {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
   // Limpar qualquer timer existente
   if (timerAtual) {
     clearTimeout(timerAtual);
