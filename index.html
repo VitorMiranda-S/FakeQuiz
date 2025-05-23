@@ -9,6 +9,19 @@
 </head>
 <body>
 
+    <!-- Tela de loading -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loading-matrix">
+        <span>W</span><span>E</span><span>L</span><span>C</span><span>O</span><span>M</span><span>E</span>
+      </div>
+      <div class="loading-text">CARREGANDO...</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Vídeo de fundo com cross-fade -->
   <div id="video-container">
     <video autoplay muted id="video-fundo-1" class="video-fundo ativo">
@@ -31,11 +44,14 @@
 
   <div id="quiz-wrapper">
     <div id="quiz-container">
+      <!-- Dentro do div quiz-container -->
       <h1 id="titulo">Bem-vindo ao Quiz de Fake News!</h1>
-      <p class="subtitulo">Consegue distinguir uma notícia verdadeira de uma falsa?</p>
+      <p class="subtitulo">Consegues distinguir uma notícia verdadeira de uma falsa?</p>
       <div class="botoes-inicio">
-        <button id="start-btn">Começar</button>
+        <button id="start-btn">Iniciar</button>
         <button id="ver-classificacoes-btn" class="btn-leaderboard-inicio">Classificações</button>
+        <button id="btn-estatisticas">Estatísticas</button>
+        <button id="btn-creditos">Créditos</button>
       </div>
     </div>
   </div>
