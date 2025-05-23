@@ -541,32 +541,34 @@ function mostrarCreditos() {
   
   creditosContainer.innerHTML = `
     <div class="credito-secao">
-      <h3 class="estatistica-titulo">Desenvolvimento</h3>
-      <ul class="credito-lista">
-        <li><strong>Design e Programação:</strong> Equipa FakeQuiz</li>
-        <li><strong>Conceito e Ideia:</strong> Projeto de Literacia Mediática</li>
-        <li><strong>Ano de Desenvolvimento:</strong> 2025</li>
-      </ul>
-    </div>
-    
-    <div class="credito-secao">
-      <h3 class="estatistica-titulo">Recursos</h3>
-      <ul class="credito-lista">
-        <li><strong>Ambiente Visual:</strong> Inspirado no filme Matrix</li>
-        <li><strong>Efeitos Sonoros:</strong> Clubbed to Death - Rob Dougan</li>
-        <li><strong>Vídeo de Fundo:</strong> https://www.vecteezy.com/members/biggapixmotion</li>
-      </ul>
-    </div>
-    
-    <div class="credito-secao">
-      <h3 class="estatistica-titulo">Agradecimentos Especiais</h3>
-      <p>O nosso agradecimento a todos os utilizadores que contribuíram com notícias e ajudaram a melhorar esta plataforma educativa.</p>
-      
-      <div class="estatistica-titulo" style="margin-top: 30px;">
-        <p>Desenvolvido com ❤️ pela equipa FakeQuiz</p>
-        <p style="font-size: 14px;">Vamos combater a desinformação juntos!</p>
-      </div>
-    </div>
+  <h3 class="estatistica-titulo">Desenvolvimento</h3>
+  <ul class="credito-lista">
+    <li><span class="credito-label">Design e Programação:</span> Equipa FakeQuiz</li>
+    <li><span class="credito-label">Conceito e Ideia:</span> Projeto de Literacia Mediática</li>
+    <li><span class="credito-label">Ano de Desenvolvimento:</span> 2025</li>
+  </ul>
+</div>
+
+<div class="credito-secao">
+  <h3 class="estatistica-titulo">Recursos</h3>
+  <ul class="credito-lista">
+    <li><span class="credito-label">Ambiente Visual:</span> Inspirado no filme Matrix</li>
+    <li><span class="credito-label">Efeitos Sonoros:</span> Clubbed to Death - Rob Dougan</li>
+    <li><span class="credito-label">Vídeo de Fundo:</span> 
+      <a href="https://www.vecteezy.com/members/biggapixmotion" target="_blank">Vecteezy (biggapixmotion)</a>
+    </li>
+  </ul>
+</div>
+
+<div class="credito-secao">
+  <h3 class="estatistica-titulo">Agradecimentos Especiais</h3>
+  <p>O nosso agradecimento a todos os utilizadores que contribuíram com notícias e ajudaram a melhorar esta plataforma educativa.</p>
+
+  <div class="estatistica-titulo" style="margin-top: 30px;">
+    <p>Desenvolvido com <span class="heart-pulse">❤️</span> pela equipa FakeQuiz</p>
+    <p style="font-size: 14px;">Vamos combater a desinformação juntos!</p>
+  </div>
+</div>
   `;
   
   container.appendChild(creditosContainer);

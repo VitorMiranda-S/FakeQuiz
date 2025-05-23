@@ -750,15 +750,14 @@ tr.errado td:last-child {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  height: 60px;
+  height: 100px;
   opacity: 0.9;
   z-index: 15;
-  filter: drop-shadow(0 0 6px #0f0);
+
 }
 
 #logo-evento:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 10px #0f0) brightness(1.2);
 }
 
 /*--------------------------------------------
@@ -1221,7 +1220,7 @@ tr.timeout td:last-child {
 }
 
 .credito-secao {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .credito-lista {
@@ -1237,4 +1236,20 @@ tr.timeout td:last-child {
 .credito-lista li strong {
   color: #0f0;
   margin-right: 10px;
+}
+
+.heart-pulse {
+  display: inline-block;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 0 0 6px #ff4d4d;
+  }
+  50% {
+    transform: scale(1.3);
+    text-shadow: 0 0 12px #ff4d4d;
+  }
 }
