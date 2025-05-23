@@ -178,21 +178,12 @@ function configurarControleAudio() {
 // ==============================================
 // Início do quiz
 function iniciarQuiz() {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   fetch('noticias.json')
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   // Resetar o estado da submissão ao iniciar um novo jogo
   noticiaJaSubmetida = false;
 
   // Carregar notícias do servidor
   fetch('http://localhost:3000/api/noticias')
->>>>>>> Stashed changes
     .then(res => res.json())
     .then(dados => {
       todasPerguntas = dados;
@@ -582,8 +573,6 @@ function mostrarPergunta() {
   }, 400);
 }
 
-<<<<<<< Updated upstream
-=======
 // Função para iniciar e gerenciar o timer
 function iniciarTimer() {
   let tempoRestante = timerDuracao;
@@ -709,13 +698,6 @@ function salvarEstatisticas() {
   localStorage.setItem('fakeQuizEstatisticas', JSON.stringify(estatisticasGlobais));
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 // Atualizar barra de progresso
 function atualizarProgresso() {
   let barra = document.getElementById('barra-progresso');
@@ -798,11 +780,9 @@ function mostrarResultado() {
 
   criarTabelaRespostas();
   criarFormularioPontuacao();
-<<<<<<< Updated upstream
-}
 
-=======
-  
+
+
   // Adicionar botão para submeter notícia - visível para todos, mas ativo apenas para quem tem >= 50%
   const btnSubmeterNoticia = document.createElement('button');
   btnSubmeterNoticia.className = 'btn-submeter-noticia';
@@ -982,7 +962,6 @@ event.preventDefault();
 }
 
 // Modificar a função criarTabelaRespostas para mostrar explicitamente se a notícia era verdadeira ou falsa e origem da notícia
->>>>>>> Stashed changes
 function criarTabelaRespostas() {
   const tabela = document.createElement('table');
   tabela.innerHTML = `
@@ -1041,21 +1020,11 @@ function criarFormularioPontuacao() {
 
 // Voltar ao início
 function voltarAoInicio() {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   // Limpar qualquer timer existente
   if (timerAtual) {
     clearTimeout(timerAtual);
     timerAtual = null;
   }
-
->>>>>>> Stashed changes
   container.innerHTML = '';
   container.classList.remove('resultado-container');
 
