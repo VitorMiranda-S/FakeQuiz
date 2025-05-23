@@ -183,6 +183,7 @@ function iniciarQuiz() {
   fetch('noticias.json')
 =======
 =======
+>>>>>>> Stashed changes
   // Resetar o estado da submissão ao iniciar um novo jogo
   noticiaJaSubmetida = false;
 
