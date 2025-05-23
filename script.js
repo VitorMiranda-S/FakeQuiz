@@ -22,6 +22,7 @@ let noticiaJaSubmetida = false;
 let timerAtual = null;
 let timerDuracao = 10; // Duração do timer em segundos
 
+
 let estatisticasGlobais = {
   totalPerguntasIA: 0,
   totalPerguntasHumanas: 0,
@@ -45,6 +46,7 @@ const video2 = document.getElementById('video-fundo-2');
 // 0. TELA DE LOADING
 // ==============================================
 
+
 // ==============================================
 // 0. TELA DE LOADING
 // ==============================================
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Configurar elementos principais
   configurarVideoFundo();
   configurarControleAudio();
-  
+
   // Limpar o texto do título imediatamente para evitar exibição antes da animação
   const tituloPrincipal = document.getElementById('titulo');
   if (tituloPrincipal) {
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Ativar o primeiro vídeo após o loading
   if (video1) video1.classList.remove('ativo');
+
 
   // Iniciar timer de 3 segundos para a tela de loading
   setTimeout(() => {
@@ -160,6 +163,7 @@ function registrarEventosMenuInicial() {
     novoBtn.addEventListener('click', mostrarCreditos);
   }
 }
+
 
 // ==============================================
 // 2. MANIPULAÇÃO DO VÍDEO E ÁUDIO
@@ -305,12 +309,13 @@ function responder(resposta) {
   if (processandoResposta) return;
   processandoResposta = true;
   
+
   // Limpar o timer atual
   if (timerAtual) {
     clearTimeout(timerAtual);
     timerAtual = null;
   }
-  
+ 
   // Desativar os botões imediatamente para feedback visual
   const botoes = document.querySelectorAll('.resposta');
   botoes.forEach(btn => {
@@ -597,12 +602,14 @@ function mostrarPergunta() {
     container.innerHTML = '';
 
     const btnVoltar = criarBotaoVoltar();
+
     container.appendChild(btnVoltar);
 
     const h2 = document.createElement('h2');
     h2.classList.add('typing');
     container.appendChild(h2);
     
+
     // Adicionar componente de timer
     const timerContainer = document.createElement('div');
     timerContainer.className = 'timer-container';
@@ -611,7 +618,7 @@ function mostrarPergunta() {
       <div class="timer-texto" id="timer-texto">${timerDuracao}s</div>
     `;
     container.appendChild(timerContainer);
-    
+
     // Criar div para os botões com ordem invertida
     const botoesDiv = document.createElement('div');
     botoesDiv.className = 'botoes-resposta';
@@ -656,9 +663,11 @@ function mostrarPergunta() {
       // Adicionar classe visual para indicar que os botões estão ativos
       btnVerdadeiro.classList.add('ativo');
       btnFalso.classList.add('ativo');
+
       
       // Iniciar o timer após o texto ser exibido
       iniciarTimer();
+
     });
 
     container.classList.remove('fade-out');
@@ -1060,9 +1069,11 @@ function criarTabelaRespostas() {
   tabela.innerHTML = `
     <tr>
       <th>Notícia</th>
+
       <th>Tua Resposta</th>
       <th>Resultado</th>
       <th>Origem</th>
+
     </tr>
   `;
 
@@ -1088,6 +1099,7 @@ function criarTabelaRespostas() {
       `;
     }
     
+
     tabela.appendChild(linha);
   });
 
@@ -1133,10 +1145,10 @@ function voltarAoInicio() {
     clearTimeout(timerAtual);
     timerAtual = null;
   }
-  
   container.innerHTML = '';
   container.classList.remove('resultado-container');
   container.classList.remove('formulario-noticia-container');
+
 
   const titulo = document.createElement('h1');
   titulo.id = 'titulo';
