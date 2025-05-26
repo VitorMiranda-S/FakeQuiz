@@ -262,7 +262,7 @@ function iniciarQuiz() {
 // Função auxiliar para processar dados carregados
 function processarDadosCarregados(dados) {
   todasPerguntas = dados;
-  perguntasSelecionadas = escolherAleatorias(todasPerguntas, 3);
+  perguntasSelecionadas = escolherAleatorias(todasPerguntas, 6); // Alterar de 3 para 6
   indiceAtual = 0;
   pontuacao = 0;
   respostasDadas = [];
@@ -271,12 +271,6 @@ function processarDadosCarregados(dados) {
   const barraAnterior = document.getElementById('barra-progresso');
   if (barraAnterior) {
     barraAnterior.remove();
-  }
-  
-  // Limpar qualquer timer existente
-  if (timerAtual) {
-    clearTimeout(timerAtual);
-    timerAtual = null;
   }
   
   // Resetar o container e mostrar a primeira pergunta
@@ -871,14 +865,73 @@ function mostrarResultado() {
   mensagem.classList.add('typing');
   container.appendChild(mensagem);
 
-  // Ajustar os limites para 3 perguntas
-  const textoMensagem = pontuacao === 3
-    ? 'Perfeito! Tens olho para a verdade.'
-    : pontuacao === 2
-    ? 'Muito bem! Mas ainda podes melhorar.'
-    : pontuacao === 1
-    ? 'Atenção às fake news!'
-    : 'Cuidado! Foste completamente enganado pela desinformação.';
+ // Mensagens mais diversificadas e personalizadas
+  let textoMensagem;
+  
+  // Para 6 perguntas, array de mensagens diferentes para cada pontuação
+  const mensagensPerfeitas = [
+    'Perfeito! És um mestre em detectar fake news. O teu olhar crítico é impressionante!',
+    'Espetacular! 100% de acerto! Devias trabalhar como fact-checker profissional!',
+    'Incrível! Acertaste todas! És praticamente imune à desinformação!'
+  ];
+  
+  const mensagensMuitoBoas = [
+    'Excelente! Quase perfeito. Tens um ótimo sentido crítico para distinguir informação falsa.',
+    'Muito bom! Apenas um erro. És quase um especialista em fact-checking!',
+    'Impressionante! 5 em 6 é uma pontuação de elite na deteção de fake news!'
+  ];
+  
+  const mensagensBoas = [
+    'Muito bom! Consegues identificar a maioria das notícias falsas. Continua a desenvolver o teu sentido crítico!',
+    'Boa pontuação! Acertaste 4 em 6 - estás no caminho certo para te tornares um expert em deteção de fake news.',
+    'Bom trabalho! Conseguiste distinguir corretamente a maioria das notícias.'
+  ];
+  
+  const mensagensMedias = [
+    'Razoável. Acertaste metade das questões. Precisas de mais atenção aos detalhes para não seres enganado.',
+    'Resultado médio. 3 em 6 é um começo, mas podes melhorar o teu sentido crítico.',
+    'Metade certo, metade errado. Estás a meio caminho de te tornares um bom detetor de notícias falsas.'
+  ];
+  
+  const mensagensFracas = [
+    'Atenção às fake news! Tiveste dificuldade em distinguir o verdadeiro do falso. Tenta analisar mais criticamente as notícias.',
+    'Precisas de praticar mais. Com apenas 2 acertos, as fake news ainda conseguem enganar-te facilmente.',
+    'Resultado baixo. Lembra-te de verificar sempre as fontes e questionares notícias sensacionalistas.'
+  ];
+  
+  const mensagensMuitoFracas = [
+    'Cuidado! Foste facilmente enganado pela desinformação. É importante verificar as fontes das notícias que lês.',
+    'Apenas 1 acerto. Estás muito vulnerável a fake news. Tenta ser mais cético com as notícias que encontras.',
+    'Resultado preocupante. Precisas urgentemente de desenvolver melhor o teu sentido crítico.'
+  ];
+  
+  const mensagensZero = [
+    'Oh não! Não acertaste nenhuma questão. A desinformação pode ser perigosa - desenvolve o teu pensamento crítico!',
+    'Zero acertos. As fake news parecem ser muito convincentes para ti. Tempo de desenvolver um olhar mais crítico!',
+    'Resultado complicado. Não conseguiste identificar corretamente nenhuma notícia. Não te preocupes, é uma habilidade que se aprende!'
+  ];
+  
+  // Escolher aleatoriamente uma das mensagens do array apropriado
+  function escolherMensagemAleatoria(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+  
+  // Selecionar a mensagem apropriada com base na pontuação
+  if (pontuacao === 6) {
+    textoMensagem = escolherMensagemAleatoria(mensagensPerfeitas);
+  } else if (pontuacao === 5) {
+    textoMensagem = escolherMensagemAleatoria(mensagensMuitoBoas);
+  } else if (pontuacao === 4) {
+    textoMensagem = escolherMensagemAleatoria(mensagensBoas);
+  } else if (pontuacao === 3) {
+    textoMensagem = escolherMensagemAleatoria(mensagensMedias);
+  } else if (pontuacao === 2) {
+    textoMensagem = escolherMensagemAleatoria(mensagensFracas);
+  } else if (pontuacao === 1) {
+    textoMensagem = escolherMensagemAleatoria(mensagensMuitoFracas);
+  } else {
+    textoMensagem = escolherMensagemAleatoria(mensagensZero);
+  }
 
   escreverTextoComEfeitoGeracao(mensagem, textoMensagem);
 
