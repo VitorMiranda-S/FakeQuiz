@@ -5,6 +5,8 @@
 
 ![FakeQuiz Preview](imagens/fakequiz-preview.jpg)
 
+Aplicação desenvolvida para o evento ESTG Connect
+
 ## Sobre o Projeto
 
 FakeQuiz é uma aplicação interativa que desafia os utilizadores a distinguir entre notícias verdadeiras e falsas, promovendo o pensamento crítico e a literacia mediática. Com um design inspirado no filme "Matrix", a aplicação apresenta um quiz envolvente onde os participantes devem decidir se cada notícia apresentada é verdadeira ou falsa.
