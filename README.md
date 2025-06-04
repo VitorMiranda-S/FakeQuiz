@@ -1,19 +1,21 @@
 # README.md
 
 ```markdown
-# FakeQuiz - Quiz de Deteção de Notícias Falsas
+# FakeQuiz – Quiz de Deteção de Notícias Falsas
 
-![FakeQuiz Preview](imagens/fakequiz-preview.jpg)
+![FakeQuiz Preview]
 
 Aplicação desenvolvida para o evento ESTG Connect
 
+
 ## Sobre o Projeto
 
-FakeQuiz é uma aplicação interativa que desafia os utilizadores a distinguir entre notícias verdadeiras e falsas, promovendo o pensamento crítico e a literacia mediática. Com um design inspirado no filme "Matrix", a aplicação apresenta um quiz envolvente onde os participantes devem decidir se cada notícia apresentada é verdadeira ou falsa.
+FakeQuiz é uma aplicação interativa que desafia os utilizadores a distinguir entre notícias verdadeiras e falsas, promovendo o pensamento crítico e a literacia mediática. Com um design inspirado no filme "Matrix", a aplicação apresenta um quiz envolvente, onde os participantes devem decidir se cada notícia apresentada é verdadeira ou falsa.
+
 
 ## Funcionalidades
 
-- **Quiz Interativo**: 3 notícias por sessão, escolhidas aleatoriamente de um banco de dados
+- **Quiz Interativo**: 6 notícias por sessão, escolhidas aleatoriamente de um banco de dados
 - **Temporizador**: 10 segundos para responder a cada pergunta
 - **Efeito Visual Único**: Animação de texto "hacker" durante a apresentação das notícias
 - **Sistema de Pontuação**: Ranking baseado em percentagem de acertos
@@ -38,7 +40,7 @@ FakeQuiz é uma aplicação interativa que desafia os utilizadores a distinguir 
 
 ### Passos para Instalação
 
-1. Clone o repositório:
+1. Clona o repositório:
 ```bash
 git clone https://github.com/seu-usuario/FakeQuiz.git
 cd FakeQuiz
@@ -78,8 +80,8 @@ FakeQuiz/
 1. Inicie o quiz clicando no botão "Começar"
 2. Leia a notícia apresentada
 3. Decida se a notícia é verdadeira ou falsa dentro de 10 segundos
-4. Veja o seu resultado final após responder a todas as perguntas
-5. Submeta sua pontuação para o ranking
+4. Vê o teu resultado final após responder a todas as perguntas
+5. Submete a tua pontuação
 6. Se obteve 50% ou mais de acertos, pode submeter suas próprias notícias
 
 ## Contribuição para o Banco de Notícias
@@ -102,7 +104,9 @@ O FakeQuiz recolhe dados anónimos sobre:
 - Tempo médio de resposta
 - Distribuição de respostas por tipo de notícia
 
-Estes dados são utilizados exclusivamente para melhorar a aplicação e compreender melhor a capacidade das pessoas de identificar desinformação.
+
+Estes dados são utilizados exclusivamente para melhorar a aplicação e compreender melhor a capacidade dos utilizadores em identificar desinformação.
+
 
 ## Características da Versão 3.0
 
